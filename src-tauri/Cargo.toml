@@ -1,0 +1,29 @@
+[package]
+name = "blmp"
+version = "0.1.0"
+description = "BLMP - BONELAB mod manager"
+authors = ["BLMP"]
+edition = "2021"
+
+[lib]
+name = "blmp_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls", "charset", "http2"] }
+zip = { version = "2.2", default-features = false, features = ["deflate"] }
+walkdir = "2"
+
+[target.'cfg(windows)'.dependencies]
+winreg = "0.52"
+
+[target.'cfg(target_os = "android")'.dependencies]
+jni = "0.21"
+ndk-context = "0.1"
